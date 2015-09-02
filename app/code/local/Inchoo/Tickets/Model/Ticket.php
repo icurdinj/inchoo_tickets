@@ -42,4 +42,5 @@ class Inchoo_Tickets_Model_Ticket extends Mage_Core_Model_Abstract
 
         return $message->getTimestamp();
     }
+
 }
