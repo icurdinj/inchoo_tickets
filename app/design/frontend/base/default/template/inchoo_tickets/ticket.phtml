@@ -1,0 +1,62 @@
+<?php /* @var $this Inchoo_Tickets_Block_Ticket */ ?>
+<?=$this->getMessagesBlock()->toHtml()?>
+
+<div class="page-title">
+    <h1><?php echo $this->__('Ticket #'.$this->getTicketId()) ?></h1>
+</div>
+<h2>Subject: <?=$this->getSubject()?></h2>
+<h2>Status: <?=$this->getStatus()?></h2>
+
+<?php $messages = $this->getMessages() ?>
+
+<table class="data-table" id="ticket-messages-table">
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <thead>
+    <tr>
+        <th><?php echo $this->__('Date') ?></th>
+        <th><?php echo $this->__('Message') ?></th>
+        <th><?php echo $this->__('Author') ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php $_odd = ''; ?>
+    <?php foreach ($messages as $message): ?>
+        <tr>
+            <td><span class="nobr"><?php echo $this->formatDate($message->getTimestamp()).' '.$this->formatTime($message->getTimestamp()) ?></span></td>
+            <td><?=Mage::helper('core')->quoteEscape($message->getMessage())?></td>
+            <td><?=Mage::helper('core')->quoteEscape($message->getAuthor())?></td>
+        </tr>
+    <?php endforeach ?>
+    </tbody>
+</table>
+
+<br><br>
+
+<form action="<?php echo $this->getUrl('inchoo/tickets/addMessage') ?>" method="post" id="form-validate" autocomplete="off">
+    <div class="fieldset">
+        <?php echo $this->getBlockHtml('formkey')?>
+        <h2 class="legend"><?php echo $this->__('Add Message') ?></h2>
+        <ul class="form-list">
+            <li>
+                <label for="message" class="required"><em>*</em><?php echo $this->__('Message') ?></label>
+                <div class="input-box">
+                    <input type="text" name="message" id="message" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Message')) ?>" class="input-text required-entry validate-no-html-tags" />
+                </div>
+            </li>
+        </ul>
+    </div>
+    <input type="hidden" name="ticket_id" id="ticket_id" value="<?=$this->getTicketId()?>">
+    <div class="buttons-set">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Save')) ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    //]]>
+</script>
