@@ -12,12 +12,6 @@ class Inchoo_Tickets_Model_Message extends Mage_Core_Model_Abstract
         $this->_init('inchoo_tickets/ticketMessage');
     }
 
-    public function setMessage($message)
-    {
-        $this->setData('message', filter_var($message, FILTER_SANITIZE_SPECIAL_CHARS));
-        return $this;
-    }
-
     public function validateMessage()
     {
         return Zend_Validate::is($this->getMessage(), 'StringLength', ['min'=>1, 'max'=>255]);

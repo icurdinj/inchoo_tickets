@@ -9,7 +9,7 @@ class Inchoo_Tickets_Block_Grid_Edit extends Mage_Adminhtml_Block_Widget_Form_Co
 {
     public function __construct()
     {
-        // $this->_objectId = 'id';
+        $this->_objectId = 'ticket_id';
         parent::__construct();
         $this->_blockGroup      = 'inchoo_tickets';
         $this->_controller      = 'grid';
@@ -38,7 +38,7 @@ class Inchoo_Tickets_Block_Grid_Edit extends Mage_Adminhtml_Block_Widget_Form_Co
     }
 
     protected function _getModelTitle(){
-        return '';
+        return 'Ticket';
     }
 
     public function getHeaderText()
@@ -53,7 +53,6 @@ class Inchoo_Tickets_Block_Grid_Edit extends Mage_Adminhtml_Block_Widget_Form_Co
         }
     }
 
-
     /**
      * Get URL for back (reset) button
      *
@@ -61,7 +60,7 @@ class Inchoo_Tickets_Block_Grid_Edit extends Mage_Adminhtml_Block_Widget_Form_Co
      */
     public function getBackUrl()
     {
-        return $this->getUrl('*/*/index2');
+        return $this->getUrl('*/*/index');
     }
 
     public function getDeleteUrl()

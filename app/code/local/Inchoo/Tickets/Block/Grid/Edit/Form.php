@@ -17,7 +17,7 @@ class Inchoo_Tickets_Block_Grid_Edit_Form extends Mage_Adminhtml_Block_Widget_Fo
     }
 
     protected function _getModelTitle(){
-        return '';
+        return 'Ticket';
     }
 
     protected function _prepareForm()
@@ -31,7 +31,7 @@ class Inchoo_Tickets_Block_Grid_Edit_Form extends Mage_Adminhtml_Block_Widget_Fo
         ));
 
         $fieldset   = $form->addFieldset('base_fieldset', array(
-            'legend'    => $this->_getHelper()->__("$modelTitle Information"),
+            'legend'    => $this->_getHelper()->__("$modelTitle Status"),
             'class'     => 'fieldset-wide',
         ));
 
@@ -42,22 +42,26 @@ class Inchoo_Tickets_Block_Grid_Edit_Form extends Mage_Adminhtml_Block_Widget_Fo
             ));
         }
 
-//        $fieldset->addField('name', 'text' /* select | multiselect | hidden | password | ...  */, array(
-//            'name'      => 'name',
-//            'label'     => $this->_getHelper()->__('Label here'),
-//            'title'     => $this->_getHelper()->__('Tooltip text here'),
-//            'required'  => true,
-//            'options'   => array( OPTION_VALUE => OPTION_TEXT, ),                 // used when type = "select"
-//            'values'    => array(array('label' => LABEL, 'value' => VALUE), ),    // used when type = "multiselect"
-//            'style'     => 'css rules',
-//            'class'     => 'css classes',
-//        ));
-//          // custom renderer (optional)
-//          $renderer = $this->getLayout()->createBlock('Block implementing Varien_Data_Form_Element_Renderer_Interface');
-//          $field->setRenderer($renderer);
+        $fieldset->addField(
+            'status',
+            'radios' /* select | multiselect | hidden | password | ...  */,
+            array(
+                'name'      => 'status',
+                'label'     => $this->_getHelper()->__('Status'),
+                //'title'     => $this->_getHelper()->__('Tooltip text here'),
+                'required'  => true,
+                //'options'   => array( OPTION_VALUE => OPTION_TEXT, ),                 // used when type = "select"
+                'values'    => array(array('label' => 'Open', 'value' => 1), array('label' => 'Closed', 'value' => 0 )),    // used when type = "multiselect"
+                'style'     => 'css rules',
+                'class'     => 'css classes'
+            )
+        );
+        // custom renderer (optional)
+        //$renderer = $this->getLayout()->createBlock('Block implementing Varien_Data_Form_Element_Renderer_Interface');
+        //$field->setRenderer($renderer);
 
-//      // New Form type element (extends Varien_Data_Form_Element_Abstract)
-//        $fieldset->addType('custom_element','MyCompany_MyModule_Block_Form_Element_Custom');  // you can use "custom_element" as the type now in ::addField([name], [HERE], ...)
+        // New Form type element (extends Varien_Data_Form_Element_Abstract)
+        //$fieldset->addType('custom_element','MyCompany_MyModule_Block_Form_Element_Custom');  // you can use "custom_element" as the type now in ::addField([name], [HERE], ...)
 
 
         if($model){

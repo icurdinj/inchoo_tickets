@@ -23,6 +23,15 @@ class Inchoo_Tickets_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid {
         return parent::_prepareCollection();
     }
 
+    protected function _getOpenCloseAction(){
+
+
+        return [
+            'caption' => $this->__('Close'),
+            'url' => ['base' => '*/*/close']
+        ];
+    }
+
     protected function _prepareColumns()
     {
         $this->addColumn(
@@ -48,7 +57,6 @@ class Inchoo_Tickets_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid {
             array(
                 'header'=> $this->__('Status'),
                 'width' => '50px',
-                'index' => 'status',
                 'type' => 'text',
                 'getter' => 'getStatus'
             )
@@ -74,19 +82,26 @@ class Inchoo_Tickets_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid {
         $this->addColumn(
             'action',
             array(
+
+                //'getter' => array($this, 'lol'),
+
+                'index' => 'ticket_id',
                 'header'=> $this->__('Action'),
                 'width' => '50px',
                 'type' => 'action',
                 'actions' => [
                     [
                         'caption' => $this->__('Close'),
-                        'url' => ['base' => '*/*/close']
-                    ],
-                    [
-                        'caption' => $this->__('Edit'),
-                        'url' => ['base' => '*/*/edit']
+                        'url' => [
+                            'base' => '*/*/close',
+                            //'params' => array('action' => 'close')
+
+                        ],
+                        'field' => 'ticket_id'
                     ]
-                ]
+                ],
+                'filter'    => false,
+                'sortable'  => false,
             )
         );
 
@@ -96,9 +111,17 @@ class Inchoo_Tickets_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid {
         return parent::_prepareColumns();
     }
 
+
+    public function lol($row)
+    {
+
+        return 'lol';
+
+    }
+
     public function getRowUrl($row)
     {
        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
     }
 
-    }
+}
