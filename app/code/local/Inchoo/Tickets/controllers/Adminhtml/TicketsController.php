@@ -57,11 +57,6 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
         $this->renderLayout();
     }
 
-    public function newAction()
-    {
-        $this->_forward('edit');
-    }
-
     public function saveAction()
     {
         $redirectBack = $this->getRequest()->getParam('back', false);
@@ -106,5 +101,21 @@ class Inchoo_Tickets_Adminhtml_TicketsController extends Mage_Adminhtml_Controll
         $this->_redirect('*/*/index');
     }
 
+    public function addMessageAction()
+    {
+        if (!$this->_validateFormKey()) return $this->_redirect('adminhtml/tickets');
 
+        if ($this->getRequest()->isPost()) {
+            $ticketId = $this->getRequest()->getPost('ticket_id');
+            $message = Mage::getModel('inchoo_tickets/message');
+
+            $message->setTicket_id($ticketId)
+                ->setMessage($this->getRequest()->getPost('message'))
+                ->setAuthor(false); // false=admin
+
+            if ($message->validateMessage()) $message->save();
+        }
+
+        $this->_redirect("adminhtml/tickets/edit/id/$ticketId");
+    }
 }

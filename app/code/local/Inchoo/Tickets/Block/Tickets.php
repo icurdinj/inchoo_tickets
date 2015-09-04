@@ -18,6 +18,18 @@ class Inchoo_Tickets_Block_Tickets extends Mage_Core_Block_Template
             ->setOrder('ticket_id', 'desc');
     }
 
+    protected function _prepareLayout()
+    {
+        parent::_prepareLayout();
+
+        $pager = $this->getLayout()
+            ->createBlock('page/html_pager', 'inchoo.tickets.pager')
+            ->setCollection($this->getTickets());
+        $this->setChild('pager', $pager);
+        $this->getTickets()->load();
+        return $this;
+    }
+
     public function getCloseUrl($ticket)
     {
         return $this->getUrl('inchoo/tickets/close', ['ticket'=>$ticket->getTicket_id()]);
@@ -31,5 +43,10 @@ class Inchoo_Tickets_Block_Tickets extends Mage_Core_Block_Template
     public function getViewUrl($ticket)
     {
         return $this->getUrl('inchoo/tickets/view', ['ticket'=>$ticket->getTicket_id()]);
+    }
+
+    public function getPagerHtml()
+    {
+        return $this->getChildHtml('pager');
     }
 }

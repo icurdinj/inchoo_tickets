@@ -12,8 +12,10 @@ class Inchoo_Tickets_Block_Grid extends Mage_Adminhtml_Block_Widget_Grid_Contain
         $this->_blockGroup      = 'inchoo_tickets';
         $this->_controller      = 'grid';
         $this->_headerText      = $this->__('Tickets');
-        //$this->_addButtonLabel  = $this->__('Add Button Label');
+
         parent::__construct();
+
+        $this->removeButton('add');
     }
 
     public function getCreateUrl()

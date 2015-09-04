@@ -44,33 +44,28 @@ class Inchoo_Tickets_Block_Grid_Edit_Form extends Mage_Adminhtml_Block_Widget_Fo
 
         $fieldset->addField(
             'status',
-            'radios' /* select | multiselect | hidden | password | ...  */,
+            'radios',
             array(
                 'name'      => 'status',
                 'label'     => $this->_getHelper()->__('Status'),
-                //'title'     => $this->_getHelper()->__('Tooltip text here'),
                 'required'  => true,
-                //'options'   => array( OPTION_VALUE => OPTION_TEXT, ),                 // used when type = "select"
-                'values'    => array(array('label' => 'Open', 'value' => 1), array('label' => 'Closed', 'value' => 0 )),    // used when type = "multiselect"
+                'values'    => array(array('label' => 'Open', 'value' => 1), array('label' => 'Closed', 'value' => 0 )),
                 'style'     => 'css rules',
                 'class'     => 'css classes'
             )
         );
-        // custom renderer (optional)
-        //$renderer = $this->getLayout()->createBlock('Block implementing Varien_Data_Form_Element_Renderer_Interface');
-        //$field->setRenderer($renderer);
 
-        // New Form type element (extends Varien_Data_Form_Element_Abstract)
-        //$fieldset->addType('custom_element','MyCompany_MyModule_Block_Form_Element_Custom');  // you can use "custom_element" as the type now in ::addField([name], [HERE], ...)
-
-
-        if($model){
+        if ($model){
             $form->setValues($model->getData());
         }
         $form->setUseContainer(true);
         $this->setForm($form);
 
+        $comments_block = $this->getLayout()
+            ->createBlock('inchoo_tickets/adminhtml_edit_form_messages')
+            ->setTemplate('inchoo_tickets/messages.phtml');
+        $this->setChild('form_after', $comments_block);
+
         return parent::_prepareForm();
     }
-
 }

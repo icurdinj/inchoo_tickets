@@ -11,7 +11,7 @@ class Inchoo_Tickets_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid {
     {
         parent::__construct();
         $this->setId('grid_id');
-        // $this->setDefaultSort('COLUMN_ID');
+        $this->setDefaultSort('ticket_id');
         $this->setDefaultDir('asc');
         $this->setSaveParametersInSession(true);
     }
@@ -21,15 +21,6 @@ class Inchoo_Tickets_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid {
         $collection = Mage::getModel('inchoo_tickets/ticket')->getCollection();
         $this->setCollection($collection);
         return parent::_prepareCollection();
-    }
-
-    protected function _getOpenCloseAction(){
-
-
-        return [
-            'caption' => $this->__('Close'),
-            'url' => ['base' => '*/*/close']
-        ];
     }
 
     protected function _prepareColumns()
@@ -82,22 +73,17 @@ class Inchoo_Tickets_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid {
         $this->addColumn(
             'action',
             array(
-
-                //'getter' => array($this, 'lol'),
-
                 'index' => 'ticket_id',
                 'header'=> $this->__('Action'),
                 'width' => '50px',
                 'type' => 'action',
                 'actions' => [
                     [
-                        'caption' => $this->__('Close'),
+                        'caption' => $this->__('Edit'),
                         'url' => [
-                            'base' => '*/*/close',
-                            //'params' => array('action' => 'close')
-
+                            'base' => '*/*/edit'
                         ],
-                        'field' => 'ticket_id'
+                        'field' => 'id'
                     ]
                 ],
                 'filter'    => false,
@@ -109,14 +95,6 @@ class Inchoo_Tickets_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid {
         $this->addExportType('*/*/exportExcel', $this->__('Excel XML'));
         
         return parent::_prepareColumns();
-    }
-
-
-    public function lol($row)
-    {
-
-        return 'lol';
-
     }
 
     public function getRowUrl($row)

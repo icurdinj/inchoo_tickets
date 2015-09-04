@@ -1,0 +1,69 @@
+<?php /* @var $this Inchoo_Tickets_Block_Adminhtml_Edit_Form_Messages */ ?>
+<h2>Subject: <?=$this->getSubject()?></h2>
+
+<?php $messages = $this->getMessages() ?>
+
+<div class="grid">
+    <div class="hor-scroll">
+        <table class="data" id="messages-table">
+            <thead>
+            <tr>
+                <th><?php echo $this->__('Date') ?></th>
+                <th><?php echo $this->__('Message') ?></th>
+                <th><?php echo $this->__('Author') ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php $_odd = ''; ?>
+            <?php foreach ($messages as $message): ?>
+                <tr>
+                    <td><span class="nobr"><?php echo $this->formatDate($message->getTimestamp()).' '.$this->formatTime($message->getTimestamp()) ?></span></td>
+                    <td><?=Mage::helper('core')->quoteEscape($message->getMessage())?></td>
+                    <td><?=Mage::helper('core')->quoteEscape($message->getAuthor())?></td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br><br>
+
+<div class="entry-edit">
+    <form action="<?php echo $this->getUrl('adminhtml/tickets/addMessage') ?>" method="post" id="form-validate" autocomplete="off">
+        <input type="hidden" name="ticket_id" id="ticket_id" value="<?=$this->getTicketId()?>">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Add Message') ?></h4>
+            <div class="form-buttons"></div>
+        </div>
+        <div class="fieldset fieldset-wide">
+            <td class="hor-scroll">
+                <?php echo $this->getBlockHtml('formkey')?>
+                <table cellspacing="0" class="form-list">
+                    <tbody>
+                    <tr>
+                        <td class="label">
+                        <label for="message" class="required"><em>*</em><?php echo $this->__('Message') ?></label>
+                            </td>
+                        <td class="value">
+                            <input type="text" name="message" id="message" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Message')) ?>" class="input-text required-entry validate-no-html-tags" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="value">
+                            <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Save')) ?>" class="button"><span><span><?php echo $this->__('Save') ?></span></span></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+    //]]>
+</script>

@@ -63,11 +63,6 @@ class Inchoo_Tickets_Block_Grid_Edit extends Mage_Adminhtml_Block_Widget_Form_Co
         return $this->getUrl('*/*/index');
     }
 
-    public function getDeleteUrl()
-    {
-        return $this->getUrl('*/*/delete', array($this->_objectId => $this->getRequest()->getParam($this->_objectId)));
-    }
-
     /**
      * Get form save URL
      *
@@ -77,9 +72,7 @@ class Inchoo_Tickets_Block_Grid_Edit extends Mage_Adminhtml_Block_Widget_Form_Co
      */
     public function getSaveUrl()
     {
-                $this->setData('form_action_url', 'save');
-                return $this->getFormActionUrl();
+        $this->setData('form_action_url', 'save');
+        return $this->getFormActionUrl();
     }
-
-
 }
