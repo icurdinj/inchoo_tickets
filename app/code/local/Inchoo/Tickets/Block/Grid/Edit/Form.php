@@ -48,10 +48,12 @@ class Inchoo_Tickets_Block_Grid_Edit_Form extends Mage_Adminhtml_Block_Widget_Fo
             array(
                 'name'      => 'status',
                 'label'     => $this->_getHelper()->__('Status'),
-                'required'  => true,
-                'values'    => array(array('label' => 'Open', 'value' => 1), array('label' => 'Closed', 'value' => 0 )),
-                'style'     => 'css rules',
-                'class'     => 'css classes'
+                'values'    => array(
+                    array('label' => 'Open', 'value' => 1),
+                    array('label' => 'Closed', 'value' => 0)
+                ),
+                'style'     => '',
+                'class'     => ''
             )
         );
 

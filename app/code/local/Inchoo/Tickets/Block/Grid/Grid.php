@@ -18,8 +18,7 @@ class Inchoo_Tickets_Block_Grid_Grid extends Mage_Adminhtml_Block_Widget_Grid {
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('inchoo_tickets/ticket')
-            ->getCollection();
+        $collection = Mage::getModel('inchoo_tickets/ticket')->getCollection();
         $collection->joinCustomerEmail();
 
         $this->setCollection($collection);
