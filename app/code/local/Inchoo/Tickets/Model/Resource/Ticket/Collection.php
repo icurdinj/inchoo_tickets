@@ -13,4 +13,12 @@ class Inchoo_Tickets_Model_Resource_Ticket_Collection extends Mage_Core_Model_Re
         $this->_init('inchoo_tickets/ticket');
     }
 
+    public function joinCustomerEmail()
+    {
+        $this->getSelect()->join(
+            array('customer_table' => 'customer_entity'),
+            'main_table.customer_id = customer_table.entity_id',
+            array('email')
+        );
+    }
 }
