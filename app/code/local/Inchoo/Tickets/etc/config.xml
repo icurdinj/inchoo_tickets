@@ -5,6 +5,7 @@
             <version>0.2.0</version>
         </Inchoo_Tickets>
     </modules>
+
     <global>
         <models>
             <inchoo_tickets>
@@ -40,7 +41,17 @@
                 </setup>
             </inchoo_tickets_setup>
         </resources>
+        <template>
+            <email>
+                <customer_inchoo_tickets_email_template>
+                    <label>Inchoo Tickets Admin Notifier</label>
+                    <file>inchoo_tickets/admin_notifier.html</file>
+                    <type>html</type>
+                </customer_inchoo_tickets_email_template>
+            </email>
+        </template>
     </global>
+
     <frontend>
         <routers>
             <inchoo>

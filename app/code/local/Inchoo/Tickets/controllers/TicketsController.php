@@ -54,6 +54,8 @@ class Inchoo_Tickets_TicketsController extends Mage_Core_Controller_Front_Action
                     ->setAuthor(true); // true=customer
 
                 if ($message->validateMessage()) $message->save();
+
+                $ticket->sendNotificationEmailToAdmin();
             }
         }
         $this->_redirect('inchoo/tickets');
